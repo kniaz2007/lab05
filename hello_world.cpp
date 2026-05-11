@@ -1,11 +1,11 @@
 #include <iostream>
 #include <string>
-using namespace std;
 
+// The main function asks for a username and prints a greeting
 int main() {
-    string name;
-    cout << "Enter your name: ";
-    cin >> name;
-    cout << "Hello world from @" << name << endl;
+    std::string name;                     // variable to store user input
+    std::cout << "Enter your name: ";     // prompt
+    std::cin >> name;                     // read input
+    std::cout << "Hello world from @" << name << std::endl; // output greeting
     return 0;
 }

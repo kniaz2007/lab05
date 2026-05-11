@@ -20,12 +20,19 @@ jobs:
         with:
           submodules: recursive
       - name: Install dependencies
-        run: sudo apt-get update && sudo apt-get install -y cmake build-essential
-      - name: Configure
+        run: sudo apt-get update && sudo apt-get install -y cmake build-essential lcov
+      - name: Configure with tests
         run: cmake -H. -B_build -DBUILD_TESTS=ON
       - name: Build
         run: cmake --build _build
       - name: Run tests
         run: cmake --build _build --target test -- ARGS=--verbose
-      - name: Install
-        run: cmake --build _build --target install
+      - name: Generate coverage report
+        run: |
+          cd _build
+          lcov --capture --directory . --output-file coverage.info --no-external
+          lcov --remove coverage.info '/usr/*' '*/third-party/*' '*/tests/*' --output-file coverage_filtered.info
+      - name: Upload to Coveralls
+        uses: coverallsapp/github-action@v2
+        with:
+          file: _build/coverage_filtered.info

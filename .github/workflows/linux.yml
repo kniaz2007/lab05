@@ -31,7 +31,7 @@ jobs:
         run: |
           cd _build
           lcov --capture --directory . --output-file coverage.info --no-external
-          lcov --remove coverage.info '/usr/*' '*/third-party/*' '*/tests/*' --output-file coverage_filtered.info
+          lcov --remove coverage.info '/usr/*' '*/third-party/*' '*/tests/*' '*/banking/*' --output-file coverage_filtered.info
       - name: Upload to Coveralls
         uses: coverallsapp/github-action@v2
         with:

@@ -1,6 +1,11 @@
 cmake_minimum_required(VERSION 3.10)
 project(lab05)
 
+if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+    add_compile_options(--coverage)
+    add_link_options(--coverage)
+endif()
+
 option(BUILD_TESTS "Build tests" OFF)
 
 add_subdirectory(banking)

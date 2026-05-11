@@ -17,11 +17,15 @@ jobs:
       CXX: ${{ matrix.compiler == 'gcc' && 'g++' || 'clang++' }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          submodules: recursive
       - name: Install dependencies
         run: sudo apt-get update && sudo apt-get install -y cmake build-essential
       - name: Configure
-        run: cmake -H. -B_build -DCMAKE_INSTALL_PREFIX=install
+        run: cmake -H. -B_build -DBUILD_TESTS=ON
       - name: Build
         run: cmake --build _build
+      - name: Run tests
+        run: cmake --build _build --target test -- ARGS=--verbose
       - name: Install
         run: cmake --build _build --target install

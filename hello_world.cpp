@@ -2,7 +2,8 @@
 #include <string>
 
 // The main function asks for a username and prints a greeting.
-int main() {
+int main()
+{
     std::string name;                     // variable to store user input.
     std::cout << "Enter your name: ";     // prompt.
     std::cin >> name;                     // read input.
